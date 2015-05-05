@@ -6,12 +6,14 @@ window = pyglet.window.Window()
 class Screen:
 
 	arr = []
+	messages = []
 
 	def __init__(self):
 		global window
 		self.char_size = 18
-		self.width = 20
-		self.height = 20
+		self.width = 50
+		self.height = 30
+		self.mesage_box_height = 5
 		window.height = self.height*self.char_size+5
 		window.width = self.width*self.char_size
 
@@ -20,7 +22,7 @@ class Screen:
 				label = pyglet.text.Label("#",
                       font_name='Courier',
                       font_size=self.char_size,
-                      x=x*self.char_size, y=y*self.char_size,
+                      x=x*self.char_size, y=y*self.char_size+self.mesage_box_height*self.char_size,
                       anchor_x='left', anchor_y='bottom')
 				self.arr.append(label)
 
@@ -40,9 +42,9 @@ for y in range(5):
 def on_draw():
 	window.clear()
 	global screen
-	print("Test")
 	for label in screen.arr:
 		label.draw()
+	pyglet.graphics.draw(2, pyglet.gl.GL_LINES, ('v2i', (0, screen.mesage_box_height*screen.char_size, window.width,screen.mesage_box_height*screen.char_size))) 
 
 pyglet.app.run()
 
